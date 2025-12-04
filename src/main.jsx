@@ -15,6 +15,8 @@ import Registration from './Pages/Registration.jsx';
 import Login from './Pages/Login.jsx';
 import Provider from './Provider/Provider.jsx';
 import Loading from './Pages/Loading.jsx';
+import Details from './Pages/Details.jsx';
+import PrivateRoute from "../src/Provider/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,9 +32,8 @@ const router = createBrowserRouter([
         Component: PetsAndSupplies,
       },
       {  
-        // path : '/game/:id',
-        // element: <PrivateRoute> <GameDetails></GameDetails> </PrivateRoute>,
-        // loader : () => fetch("/popular.json")
+        path : '/all/:myId',
+        element: <PrivateRoute> <Details></Details> </PrivateRoute>
       },
       {  
         path : '/addlisting',
