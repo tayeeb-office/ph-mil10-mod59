@@ -1,36 +1,52 @@
-import React from "react";
-import logo from '../assets/Logo.png'
+import React, { useContext } from "react";
+import { AuthContext } from "../Provider/Provider";
+import logo from "../assets/Logo.png";
 import { NavLink } from "react-router";
+import { signOut } from "firebase/auth";
+import auth from "../Firebase/firebase.config";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
+  const handelSignOut = () => {
+    signOut(auth);
+  };
   const Links = (
     <>
-      <li>
+        <li>
         <NavLink to="/" className="text-black font-bold text-l">
           Home
         </NavLink>
       </li>
-      <li>
+        <li>
         <NavLink to="/pets&supplies" className="text-black font-bold text-l">
           Pets & Supplies
         </NavLink>
-      </li>
-      <li>
+        </li>
+      {
+        user &&
+        <li>
         <NavLink to="/addlisting" className="text-black font-bold text-l">
           Add Listing
         </NavLink>
       </li>
-      <li>
+      }
+      {
+        user &&
+        <li>
         <NavLink to="/mylistings" className="text-black font-bold text-l">
           My Listings
         </NavLink>
       </li>
-      <li>
+      }
+      {
+        user &&
+        <li>
         <NavLink to="/myorders" className="text-black font-bold text-l">
           My Orders
         </NavLink>
       </li>
-      
+      }
     </>
   );
   return (
@@ -59,23 +75,32 @@ const Navbar = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              {
-                Links
-              }
+              {Links}
             </ul>
           </div>
           <img className=" w-[170px]" src={logo} alt="Logo"></img>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {
-                Links
-            }
-          </ul>
+          <ul className="menu menu-horizontal px-1">{Links}</ul>
         </div>
         <div className="navbar-end gap-2">
-          <a className="btn bg-[#37EC13]"> <NavLink to={'/registration'}>Sign Up</NavLink></a>
-          <a className="btn bg-[#BFF8B3]"> <NavLink to={'/login'}>Log In</NavLink></a>
+          {!user && (
+            <NavLink to="/registration" className="btn bg-[#37EC13]">
+              Sign Up
+            </NavLink>
+          )}
+
+          {!user && (
+            <NavLink to="/login" className="btn bg-[#BFF8B3]">
+              Log In
+            </NavLink>
+          )}
+
+          {user && (
+            <NavLink onClick={handelSignOut} className="btn bg-[#BFF8B3]">
+              Log out
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

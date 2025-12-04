@@ -1,100 +1,155 @@
 import React from "react";
+
 import hero1 from "../assets/Hero01.jpg";
 import hero2 from "../assets/Hero02.jpg";
 import hero3 from "../assets/Hero03.jpg";
+
 import dog1 from "../assets/Dog01.png";
+
 import { FaShieldAlt } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { PiHandHeartDuotone } from "react-icons/pi";
-import cat1 from '../assets/Cat1.png'
-import cat2 from '../assets/Cat2.png'
-import cat3 from '../assets/Cat3.png'
-import cat4 from '../assets/Cat4.png'
+
+import cat1 from "../assets/Cat1.png";
+import cat2 from "../assets/Cat2.png";
+import cat3 from "../assets/Cat3.png";
+import cat4 from "../assets/Cat4.png";
+
+import Marquee from "react-fast-marquee";
+import banner1 from "../assets/banner01.jpg";
+import banner2 from "../assets/banner02.jpg";
+import banner3 from "../assets/banner03.jpg";
+import banner4 from "../assets/banner04.jpg";
+import banner5 from "../assets/banner05.jpg";
+import banner6 from "../assets/banner06.jpg";
 
 const Home = () => {
   return (
     <div>
       <title>Home</title>
 
+      {/* Banner Section */}
+      <div className="md:w-6xl mx-auto py-[50px]">
+        <Marquee speed={100}>
+          <div className="card w-96 shadow-sm py-[20px] h-[200px]">
+            <figure>
+              <img src={banner1} alt="banners" />
+            </figure>
+          </div>
+
+          <div className="card w-96 shadow-sm py-[20px]  h-[170px]">
+            <figure>
+              <img src={banner1} alt="banners" />
+            </figure>
+          </div>
+
+          <div className="card w-96 shadow-sm py-[20px]  h-[170px]">
+            <figure>
+              <img src={banner2} alt="banners" />
+            </figure>
+          </div>
+
+          <div className="card w-96 shadow-sm py-[20px]  h-[170px]">
+            <figure>
+              <img src={banner3} alt="banners" />
+            </figure>
+          </div>
+
+          <div className="card w-96 shadow-sm py-[20px]  h-[170px]">
+            <figure>
+              <img src={banner4} alt="banners" />
+            </figure>
+          </div>
+
+          <div className="card w-96 shadow-sm py-[20px]  h-[170px]">
+            <figure>
+              <img src={banner5} alt="banners" />
+            </figure>
+          </div>
+
+          <div className="card w-96 shadow-sm py-[20px] h-[170px]">
+            <figure>
+              <img src={banner6} alt="banners" />
+            </figure>
+          </div>
+        </Marquee>
+      </div>
+
       {/* Catagories */}
-      <section >
+      <section>
         <div className="mx-auto max-w-6xl px-6 py-14">
           <h2 className="text-3xl font-extrabold text-slate-900">
             Shop by Category
           </h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              <a
-                className="rounded-2xl bg-[#E9F8E0] p-4">
-                <div className="overflow-hidden rounded-xl bg-white/30">
-                  <img
-                    src={cat1}
-                    alt='Pet Adoption'
-                    className="h-56 w-full rounded-xl object-cover"
-                  />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-base font-extrabold text-slate-900">
-                    Pet Adoption
-                  </h3>
-                  <p className="mt-1 text-sm text-emerald-700/80">
-                    Find your perfect companion
-                  </p>
-                </div>
-              </a>
-              <a
-                className="rounded-2xl bg-[#E9F8E0] p-4">
-                <div className="overflow-hidden rounded-xl bg-white/30">
-                  <img
-                    src={cat2}
-                    alt='Pet Food'
-                    className="h-56 w-full rounded-xl object-cover"
-                  />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-base font-extrabold text-slate-900">
-                    Pet Food
-                  </h3>
-                  <p className="mt-1 text-sm text-emerald-700/80">
-                    Nutritious meals for every diet
-                  </p>
-                </div>
-              </a>
-              <a
-                className="rounded-2xl bg-[#E9F8E0] p-4">
-                <div className="overflow-hidden rounded-xl bg-white/30">
-                  <img
-                    src={cat3}
-                    alt='Accessories'
-                    className="h-56 w-full rounded-xl object-cover"
-                  />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-base font-extrabold text-slate-900">
-                    Accessories
-                  </h3>
-                  <p className="mt-1 text-sm text-emerald-700/80">
-                    Toys, collars, beds, and more
-                  </p>
-                </div>
-              </a>
-              <a
-                className="rounded-2xl bg-[#E9F8E0] p-4">
-                <div className="overflow-hidden rounded-xl bg-white/30">
-                  <img
-                    src={cat4}
-                    alt='Pet Care'
-                    className="h-56 w-full rounded-xl object-cover"
-                  />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-base font-extrabold text-slate-900">
-                    Pet Care
-                  </h3>
-                  <p className="mt-1 text-sm text-emerald-700/80">
-                    Health and wellness products
-                  </p>
-                </div>
-              </a>
+            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+              <div className="overflow-hidden rounded-xl bg-white/30">
+                <img
+                  src={cat1}
+                  alt="Pet Adoption"
+                  className="h-56 w-full rounded-xl object-cover"
+                />
+              </div>
+              <div className="mt-4">
+                <h3 className="text-base font-extrabold text-slate-900">
+                  Pet Adoption
+                </h3>
+                <p className="mt-1 text-sm text-emerald-700/80">
+                  Find your perfect companion
+                </p>
+              </div>
+            </a>
+            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+              <div className="overflow-hidden rounded-xl bg-white/30">
+                <img
+                  src={cat2}
+                  alt="Pet Food"
+                  className="h-56 w-full rounded-xl object-cover"
+                />
+              </div>
+              <div className="mt-4">
+                <h3 className="text-base font-extrabold text-slate-900">
+                  Pet Food
+                </h3>
+                <p className="mt-1 text-sm text-emerald-700/80">
+                  Nutritious meals for every diet
+                </p>
+              </div>
+            </a>
+            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+              <div className="overflow-hidden rounded-xl bg-white/30">
+                <img
+                  src={cat3}
+                  alt="Accessories"
+                  className="h-56 w-full rounded-xl object-cover"
+                />
+              </div>
+              <div className="mt-4">
+                <h3 className="text-base font-extrabold text-slate-900">
+                  Accessories
+                </h3>
+                <p className="mt-1 text-sm text-emerald-700/80">
+                  Toys, collars, beds, and more
+                </p>
+              </div>
+            </a>
+            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+              <div className="overflow-hidden rounded-xl bg-white/30">
+                <img
+                  src={cat4}
+                  alt="Pet Care"
+                  className="h-56 w-full rounded-xl object-cover"
+                />
+              </div>
+              <div className="mt-4">
+                <h3 className="text-base font-extrabold text-slate-900">
+                  Pet Care
+                </h3>
+                <p className="mt-1 text-sm text-emerald-700/80">
+                  Health and wellness products
+                </p>
+              </div>
+            </a>
           </div>
         </div>
       </section>

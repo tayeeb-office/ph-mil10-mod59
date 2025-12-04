@@ -13,6 +13,8 @@ import MyListings from './Pages/MyListings.jsx';
 import MyOrders from './Pages/MyOrders.jsx';
 import Registration from './Pages/Registration.jsx';
 import Login from './Pages/Login.jsx';
+import Provider from './Provider/Provider.jsx';
+import Loading from './Pages/Loading.jsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
         Component: Login,
       },
       {  
+        path : '/loading',
+        Component: Loading,
+      },
+      {  
         path : '/*',
         Component: Error,
       }
@@ -62,6 +68,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider><RouterProvider router={router} /></Provider>
   </StrictMode>,
 )
