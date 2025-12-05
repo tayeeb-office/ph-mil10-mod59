@@ -17,7 +17,7 @@ import Provider from "./Provider/Provider.jsx";
 import Loading from "./Pages/Loading.jsx";
 import Details from "./Pages/Details.jsx";
 import PrivateRoute from "../src/Provider/PrivateRoute.jsx";
-import Pet from "./Pages/Pet.jsx";
+import CategoryPage from "./Pages/CategoryPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/category-filtered-product/:category",
-        Component: Pet,
+        Component: CategoryPage,
       },
       {
         path: "/all/:myId",

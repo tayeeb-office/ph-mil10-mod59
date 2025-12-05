@@ -8,23 +8,27 @@ const Details = () => {
   const { myId } = useParams();
   const [loading, setLoading] = useState(true);
 
-  const [myservice, setMyService] = useState([]);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const { user } = useContext(AuthContext);
+  const [quantity, setQuantity] = useState(1);
 
-    const handelSubmit = (e) => {
+  const [myservice, setMyService] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const { user } = useContext(AuthContext);
+
+  const handelSubmit = (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = {
-      name: form.title.value,
-      category: form.category.value,
-      price: parseInt(form.price.value),
+      productId: selectedItem?._id,
+      name: selectedItem?.name,
+      price: parseInt(selectedItem?.price),
+      quantity: selectedItem?.category === "Pets" ? 1 : parseInt(quantity),
+      pickupDate: form.availableFrom.value,
+      phone: form.phone.value,
       location: form.location.value,
-      description: form.description.value,
-      image: form.imageUrl.value,
-      date: form.availableFrom.value,
-      email: form.contactEmail.value,
+      note: form.description.value,
+      buyerName: user.displayName,
+      buyerEmail: user.email,
     };
 
     axios
@@ -123,6 +127,13 @@ const Details = () => {
               <button
                 onClick={() => {
                   setSelectedItem(service);
+
+                  if (service.category === "Pets") {
+                    setQuantity(1);
+                  } else {
+                    setQuantity("");
+                  }
+
                   document.getElementById("update_modal").showModal();
                 }}
                 className="mt-10 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-lime-400 font-semibold text-slate-900 hover:bg-lime-300"
@@ -134,162 +145,151 @@ const Details = () => {
         </div>
       </div>
 
-       <dialog id="update_modal" className="modal">
-                <div className="modal-box">
-                  <h3 className="font-bold text-lg mb-6 text-center">
-                    Update Listing
-                  </h3>
+      <dialog id="update_modal" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-6 text-center">Update Listing</h3>
 
-                  {selectedItem && (
-                    <form onSubmit={handelSubmit} className="space-y-4">
-                      {/* Name */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Product / Pet Name
-                        </label>
-                        <input
-                          name="title"
-                          disabled
-                          defaultValue={selectedItem.name}
-                          className="input input-bordered w-full"
-                          type="text"
-                        />
-                      </div>
+          {selectedItem && (
+            <form onSubmit={handelSubmit} className="space-y-4">
+              {/* Buyer Name */}
+              <div>
+                <label className="block mb-1 font-semibold">
+                  Customer Name
+                </label>
+                <input
+                  name="CustomerName"
+                  defaultValue={user.displayName}
+                  disabled
+                  className="input input-bordered w-full"
+                  type="text"
+                />
+              </div>
 
-                      {/* Buyer Name */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Customer Name
-                        </label>
-                        <input
-                          name="CustomerName"
-                          className="input input-bordered w-full"
-                          type="text"
-                        />
-                      </div>
+              {/* Contact Email */}
+              <div>
+                <label className="block mb-1 font-semibold">
+                  Contact Email
+                </label>
+                <input
+                  name="contactEmail"
+                  disabled
+                  defaultValue={user.email}
+                  className="input input-bordered w-full"
+                  type="email"
+                />
+              </div>
 
-                      {/* Price */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Price
-                        </label>
-                        <input
-                          name="price"
-                          disabled
-                          defaultValue={selectedItem.price}
-                          type="number"
-                          className="input input-bordered w-full"
-                        />
-                      </div>
+              {/* ID */}
+              <div>
+                <label className="block mb-1 font-semibold">Product ID</label>
+                <input
+                  name="title"
+                  disabled
+                  defaultValue={selectedItem._id}
+                  className="input input-bordered w-full"
+                  type="text"
+                />
+              </div>
 
-                      {/* Quantity */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Quantity
-                        </label>
-                        <input
-                          name="quantity"
-                          type="number"
-                          className="input input-bordered w-full"
-                        />
-                      </div>
+              {/* Name */}
+              <div>
+                <label className="block mb-1 font-semibold">
+                  Product / Pet Name
+                </label>
+                <input
+                  name="title"
+                  disabled
+                  defaultValue={selectedItem.name}
+                  className="input input-bordered w-full"
+                  type="text"
+                />
+              </div>
 
-                      {/* Phone */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Phone Number
-                        </label>
-                        <input
-                          name="phone"
-                          type="number"
-                          className="input input-bordered w-full"
-                        />
-                      </div>
+              {/* Price */}
+              <div>
+                <label className="block mb-1 font-semibold">Price</label>
+                <input
+                  name="price"
+                  disabled
+                  defaultValue={selectedItem.price}
+                  type="number"
+                  className="input input-bordered w-full"
+                />
+              </div>
 
-                      {/* Pickup Date */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Pickup Date
-                        </label>
-                        <input
-                          name="availableFrom"
-                          disabled
-                          type="date"
-                          defaultValue={selectedItem.date}
-                          className="input input-bordered w-full"
-                        />
-                      </div>
+              {/* Quantity */}
+              <div>
+                <label className="block mb-1 font-semibold">Quantity</label>
+                <input
+                  name="quantity"
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  disabled={selectedItem?.category === "Pets"}
+                  className="input input-bordered w-full disabled:bg-gray-200 disabled:cursor-not-allowed"
+                />
+              </div>
 
-                      {/* Address */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Location
-                        </label>
-                        <input
-                          name="location"
-                          defaultValue={selectedItem.location}
-                          className="input input-bordered w-full"
-                          type="text"
-                        />
-                      </div>
+              {/* Pickup Date */}
+              <div>
+                <label className="block mb-1 font-semibold">Pickup Date</label>
+                <input
+                  name="availableFrom"
+                  type="date"
+                  className="input input-bordered w-full"
+                />
+              </div>
 
-                      {/* Description */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Description
-                        </label>
-                        <textarea
-                          name="description"
-                          defaultValue={selectedItem.description}
-                          className="textarea textarea-bordered w-full"
-                        />
-                      </div>
+              {/* Phone */}
+              <div>
+                <label className="block mb-1 font-semibold">Phone Number</label>
+                <input
+                  name="phone"
+                  type="number"
+                  className="input input-bordered w-full"
+                />
+              </div>
 
-                      {/* Image */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Image URL
-                        </label>
-                        <input
-                          name="imageUrl"
-                          defaultValue={selectedItem.image}
-                          className="input input-bordered w-full"
-                          type="url"
-                        />
-                      </div>
+              {/* Address */}
+              <div>
+                <label className="block mb-1 font-semibold">Address</label>
+                <input
+                  name="location"
+                  className="input input-bordered w-full"
+                  type="text"
+                />
+              </div>
 
-                      {/* Contact Email */}
-                      <div>
-                        <label className="block mb-1 font-semibold">
-                          Contact Email
-                        </label>
-                        <input
-                          name="contactEmail"
-                          defaultValue={selectedItem.email}
-                          className="input input-bordered w-full"
-                          type="email"
-                        />
-                      </div>
+              {/* Note */}
+              <div>
+                <label className="block mb-1 font-semibold">
+                  Additional Note
+                </label>
+                <textarea
+                  name="description"
+                  className="textarea textarea-bordered w-full"
+                />
+              </div>
 
-                      {/* Buttons */}
-                      <div className="modal-action flex justify-end gap-4">
-                        <button
-                          type="button"
-                          className="btn"
-                          onClick={() =>
-                            document.getElementById("update_modal").close()
-                          }
-                        >
-                          Close
-                        </button>
-                        <button type="submit" className="btn bg-lime-400">
-                          Update
-                        </button>
-                      </div>
-                    </form>
-                  )}
-                </div>
-              </dialog>
+              {/* Buttons */}
+              <div className="modal-action flex justify-end gap-4">
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() =>
+                    document.getElementById("update_modal").close()
+                  }
+                >
+                  Close
+                </button>
+                <button type="submit" className="btn bg-lime-400">
+                  Purchase / Adopt
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </dialog>
     </div>
   );
 };
