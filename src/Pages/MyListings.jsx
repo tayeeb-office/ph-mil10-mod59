@@ -75,7 +75,7 @@ const MyListings = () => {
 
         {/* Table */}
         <div className="mt-10 rounded-3xl bg-white">
-          <div className="hidden md:grid grid-cols-5 text-center px-8 py-5 font-extrabold bg-[#f7fbf3]">
+          <div className="hidden md:grid grid-cols-5 text-center px-8 py-5 font-extrabold bg-white border-t">
             <div>Image</div>
             <div>Title</div>
             <div>Category</div>

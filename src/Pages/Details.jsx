@@ -9,8 +9,7 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
 
   const [quantity, setQuantity] = useState(1);
-
-  const [myservice, setMyService] = useState([]);
+  
   const [selectedItem, setSelectedItem] = useState(null);
   const { user } = useContext(AuthContext);
 
@@ -32,16 +31,12 @@ const Details = () => {
     };
 
     axios
-      .put(`http://localhost:3000/update/${selectedItem._id}`, formData)
+      .post("http://localhost:3000/orders", formData)
       .then((res) => {
         console.log(res);
-        // Update local state to reflect changes immediately
-        setMyService((prev) =>
-          prev.map((item) =>
-            item._id === selectedItem._id ? { ...item, ...formData } : item
-          )
-        );
         document.getElementById("update_modal").close();
+        form.reset();
+        setQuantity(1);
       })
       .catch((err) => console.error(err));
   };
@@ -223,6 +218,7 @@ const Details = () => {
                 <input
                   name="quantity"
                   type="number"
+                  required
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                   disabled={selectedItem?.category === "Pets"}
@@ -235,6 +231,7 @@ const Details = () => {
                 <label className="block mb-1 font-semibold">Pickup Date</label>
                 <input
                   name="availableFrom"
+                  required
                   type="date"
                   className="input input-bordered w-full"
                 />
@@ -245,6 +242,7 @@ const Details = () => {
                 <label className="block mb-1 font-semibold">Phone Number</label>
                 <input
                   name="phone"
+                  required
                   type="number"
                   className="input input-bordered w-full"
                 />
@@ -255,6 +253,7 @@ const Details = () => {
                 <label className="block mb-1 font-semibold">Address</label>
                 <input
                   name="location"
+                  required
                   className="input input-bordered w-full"
                   type="text"
                 />
