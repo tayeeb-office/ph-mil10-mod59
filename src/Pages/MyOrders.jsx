@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import axios from "axios";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const MyOrders = () => {
   const [myorders, setMyorders] = useState([]);
@@ -16,24 +18,57 @@ const MyOrders = () => {
       });
   }, []);
 
-  console.log(myorders);
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+
+    doc.text("My Orders Report", 14, 15);
+
+    const tableColumn = [
+      "Product Name",
+      "Buyer Name",
+      "Price",
+      "Quantity",
+      "Address",
+      "Date",
+      "Phone",
+    ];
+
+    const tableRows = myorders.map((item) => [
+      item.name,
+      item.buyerName,
+      item.price,
+      item.quantity,
+      item.location,
+      item.pickupDate,
+      item.phone,
+    ]);
+
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+      styles: { fontSize: 9 },
+    });
+
+    doc.save("My_Orders_Report.pdf");
+  };
 
   return (
     <div className="min-h-screen bg-[#f7fbf3] px-4 py-10 text-slate-900">
       <div className="mx-auto max-w-6xl">
-        {/* Header */}
+    
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-5xl font-extrabold">My Orders</h1>
 
-          <Link
-            to="/addlisting"
+          <button
+            onClick={handleDownloadPDF}
             className="inline-flex h-12 items-center justify-center rounded-2xl bg-lime-400 px-6 font-semibold hover:bg-lime-300"
           >
             Download Report
-          </Link>
+          </button>
         </div>
 
-        {/* Table */}
+ 
         <div className="mt-10 rounded-3xl bg-white">
           <div className="hidden md:grid grid-cols-7 text-center px-8 py-5 font-extrabold bg-white border-t">
             <div>Product/Listing Name</div>
@@ -59,6 +94,7 @@ const MyOrders = () => {
               <div>{item.phone}</div>
             </div>
           ))}
+
           {myorders.length === 0 && (
             <div className="text-center py-10 text-slate-600">
               No orders found.
