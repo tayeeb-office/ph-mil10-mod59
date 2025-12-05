@@ -13,40 +13,37 @@ const Navbar = () => {
   };
   const Links = (
     <>
-        <li>
+      <li>
         <NavLink to="/" className="text-black font-bold text-l">
           Home
         </NavLink>
       </li>
-        <li>
+      <li>
         <NavLink to="/pets&supplies" className="text-black font-bold text-l">
           Pets & Supplies
         </NavLink>
+      </li>
+      {user && (
+        <li>
+          <NavLink to="/addlisting" className="text-black font-bold text-l">
+            Add Listing
+          </NavLink>
         </li>
-      {
-        user &&
+      )}
+      {user && (
         <li>
-        <NavLink to="/addlisting" className="text-black font-bold text-l">
-          Add Listing
-        </NavLink>
-      </li>
-      }
-      {
-        user &&
+          <NavLink to="/mylistings" className="text-black font-bold text-l">
+            My Listings
+          </NavLink>
+        </li>
+      )}
+      {user && (
         <li>
-        <NavLink to="/mylistings" className="text-black font-bold text-l">
-          My Listings
-        </NavLink>
-      </li>
-      }
-      {
-        user &&
-        <li>
-        <NavLink to="/myorders" className="text-black font-bold text-l">
-          My Orders
-        </NavLink>
-      </li>
-      }
+          <NavLink to="/myorders" className="text-black font-bold text-l">
+            My Orders
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
@@ -94,6 +91,26 @@ const Navbar = () => {
             <NavLink to="/login" className="btn bg-[#BFF8B3]">
               Log In
             </NavLink>
+          )}
+
+          {user && (
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+              title={user?.displayName || "User"}
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Avatar"
+                  src={
+                    user?.photoURL ||
+                    "https://i.ibb.co/2yZ3bVP/default-avatar.png"
+                  }
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
           )}
 
           {user && (

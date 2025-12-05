@@ -32,6 +32,8 @@ const Home = () => {
 
     const datas = use(dataPromise);
 
+    
+
   return (
     <div>
       <title>Home</title>

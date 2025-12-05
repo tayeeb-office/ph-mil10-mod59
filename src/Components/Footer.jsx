@@ -12,7 +12,7 @@ const Footer = () => {
                         
                         <div className='md:w-[550px]'>
                             <img className='md:ml-[40px] ml-[0px] ' src={logo} alt="Logo" />
-                            <p className='font-semibold md:ml-[70px] ml-[30px] '>Connecting pets with loving homes. Helping families find the perfect companion with care and trust.</p>
+                            <p className='font-semibold md:ml-[70px] ml-[30px] '>PawMart connects local pet owners and buyers for adoption and pet care products.</p>
                         </div>
                         
                         <div className='md:max-w-[1440px]  md:mx-auto flex flex-col md:flex-row p-10 gap-[30px] md:gap-[80px] '>
