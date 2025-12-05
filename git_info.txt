@@ -9,4 +9,4 @@ git push -u origin main
 
 Repo Link : https://github.com/tayeeb-office/ph-mil10-mod59.git
 
-Live Link : 
+Live Link : ph-mil10-mod59.netlify.app

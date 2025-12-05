@@ -3,6 +3,8 @@ import { AuthContext } from "../Provider/Provider";
 import { Link } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyListings = () => {
   const [myservice, setMyService] = useState([]);
@@ -21,23 +23,43 @@ const MyListings = () => {
   }, [user?.email]);
 
   const handelDelete = (id) => {
-    axios
-      .delete(`https://ph-mil10-mod59-backend.vercel.app/delete/${id}`)
-      .then((res) => {
-        console.log(res);
-        if (res.data.deletedCount == 1) {
-          const filterData = myservice.filter((service) => service._id != id);
-          setMyService(filterData);
-          Swal.fire({
-            title: "Item Deleted",
-            icon: "success",
-            draggable: true,
-          });
-        }
-      })
-      .catch((err) => console.error(err));
-  };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`https://ph-mil10-mod59-backend.vercel.app/delete/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount === 1) {
+              const filterData = myservice.filter(
+                (service) => service._id !== id
+              );
+              setMyService(filterData);
 
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your listing has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            Swal.fire({
+              title: "Error!",
+              text: "Failed to delete the item.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
   const handelSubmit = (e) => {
     e.preventDefault();
 
@@ -66,6 +88,9 @@ const MyListings = () => {
             item._id === selectedItem._id ? { ...item, ...formData } : item
           )
         );
+
+        toast.success("Listing updated successfully!");
+
         document.getElementById("update_modal").close();
       })
       .catch((err) => console.error(err));
@@ -259,6 +284,7 @@ const MyListings = () => {
           )}
         </div>
       </dialog>
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 };
