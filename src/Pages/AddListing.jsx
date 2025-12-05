@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../Provider/Provider";
 import axios from "axios";
 
 const AddListing = () => {
   const { user } = useContext(AuthContext);
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [price, setPrice] = useState(0);
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +15,7 @@ const AddListing = () => {
 
     const name = form.title.value;
     const category = form.category.value;
-    const price = parseInt(form.price.value);
+    const price = selectedCategory === "Pets" ? 0 : parseFloat(form.price.value);
     const location = form.location.value;
     const description = form.description.value;
     const image = form.imageUrl.value;
@@ -81,8 +84,16 @@ const AddListing = () => {
                   <select
                     id="category"
                     name="category"
-                    className="h-12 w-full rounded-2xl border border-green-200 bg-green-50/40 px-4 pr-10 text-slate-800 focus:border-green-300 "
-                    defaultValue=""
+                    value={selectedCategory}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setSelectedCategory(value);
+
+                      if (value === "Pets") {
+                        setPrice(0);
+                      }
+                    }}
+                    className="h-12 w-full rounded-2xl border border-green-200 bg-green-50/40 px-4 pr-10 text-slate-800 focus:border-green-300"
                   >
                     <option value="" disabled>
                       Select a category
@@ -114,8 +125,10 @@ const AddListing = () => {
                   name="price"
                   type="number"
                   step="0.01"
-                  placeholder="0.00 (Set to 0 for adoption)"
-                  className="h-12 w-full rounded-2xl border border-green-200 bg-green-50/40 px-4 text-slate-800 placeholder:text-green-700/70 focus:border-green-300"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  disabled={selectedCategory === "Pets"}
+                  className="h-12 w-full rounded-2xl border border-green-200 bg-green-50/40 px-4 text-slate-800 placeholder:text-green-700/70 focus:border-green-300 disabled:cursor-not-allowed disabled:bg-gray-200"
                 />
               </div>
             </div>
@@ -143,7 +156,7 @@ const AddListing = () => {
                   htmlFor="availableFrom"
                   className="block text-sm font-semibold text-slate-800"
                 >
-                  Available for Pick Up From
+                  Available for Pick Up
                 </label>
                 <div className="relative">
                   <input
