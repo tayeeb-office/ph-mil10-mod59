@@ -1,21 +1,62 @@
-import React, { use } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Links } from "react-router";
 
-const dataPromise = fetch("http://localhost:3000/services").then((res) =>
-  res.json()
-);
+// const dataPromise = fetch("http://localhost:3000/services").then((res) =>
+//   res.json()
+// );
 
 const PetsAndSupplies = () => {
-  const datas = use(dataPromise);
+  const [service, setService] = useState([]);
+  const [category, setCategory] = useState("");
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/services?category=${category}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setService(data);
+      })
+      .catch((err) => console.log(err));
+  }, [category]);
 
   return (
     <div className="ml-[20px] md:w-6xl md:mx-auto py-16">
       <title>Pets & Supplies</title>
       <div>
-        <h2 className="text-3xl  font-bold pb-8">Find Your New Best Friend or a Great Deal</h2>
+        <div className="flex flex-col md:flex-row justify-between items-center py-8">
+          <h2 className="text-3xl  font-bold pb-8">
+            Find Your New Best Friend or a Great Deal
+          </h2>
+          <div className="space-y-2">
+            <div className="relative">
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                id="category"
+                name="category"
+                className="h-12 w-full rounded-2xl border border-green-200 bg-green-50/40 px-4 pr-10 text-slate-800 focus:border-green-300 "
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select a category
+                </option>
+                <option value="">All</option>
+                <option value="Pets">Pets</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Food">Food</option>
+                <option value="Care Products">Pet Care Products</option>
+              </select>
+
+              <svg
+                className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              ></svg>
+            </div>
+          </div>
+        </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {datas?.map((item) => (
+          {service?.map((item) => (
             <div
               key={item._id}
               className="w-full rounded-3xl border border-green-200/70 bg-white"
@@ -35,10 +76,8 @@ const PetsAndSupplies = () => {
                   </h3>
 
                   <div className="mt-2 flex items-center justify-between text-sm font-medium text-green-700/80">
-                    <span >{item.category}</span>
-                    <span className=" pl-3 text-right">
-                      {item.location}
-                    </span>
+                    <span>{item.category}</span>
+                    <span className=" pl-3 text-right">{item.location}</span>
                   </div>
 
                   <div className="mt-3 text-2xl font-extrabold text-slate-900">
@@ -46,12 +85,12 @@ const PetsAndSupplies = () => {
                   </div>
 
                   <Link to={`/all/${item?._id}`}>
-                  <button
-                    type="button"
-                    className="mt-5 h-12 w-full rounded-2xl bg-lime-400 font-semibold text-slate-900 hover:bg-lime-300"
-                  >
-                    See Details
-                  </button>
+                    <button
+                      type="button"
+                      className="mt-5 h-12 w-full rounded-2xl bg-lime-400 font-semibold text-slate-900 hover:bg-lime-300"
+                    >
+                      See Details
+                    </button>
                   </Link>
 
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">

@@ -31,10 +31,9 @@ const AddListing = () => {
       email,
     };
 
-    axios.post( 'http://localhost:3000/services', formData)
-    .then(res =>{
-        console.log(res);
-    })
+    axios.post("http://localhost:3000/services", formData).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
@@ -88,10 +87,10 @@ const AddListing = () => {
                     <option value="" disabled>
                       Select a category
                     </option>
-                    <option value="pets">Pets</option>
-                    <option value="accessories">Accessories</option>
-                    <option value="food">Food</option>
-                    <option value="services">Services</option>
+                    <option value="Pets">Pets</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Food">Food</option>
+                    <option value="Care Products">Pet Care Products</option>
                   </select>
 
                   <svg
