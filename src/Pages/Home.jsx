@@ -23,14 +23,14 @@ import banner3 from "../assets/banner03.jpg";
 import banner4 from "../assets/banner04.jpg";
 import banner5 from "../assets/banner05.jpg";
 import banner6 from "../assets/banner06.jpg";
+import { Typewriter } from "react-simple-typewriter";
 
-  const dataPromise = fetch("http://localhost:3000/services").then((res) =>
-    res.json()
-  );
+const dataPromise = fetch(
+  "https://ph-mil10-mod59-backend.vercel.app/services"
+).then((res) => res.json());
 
 const Home = () => {
-
-    const datas = use(dataPromise);
+  const datas = use(dataPromise);
 
   return (
     <div>
@@ -82,6 +82,23 @@ const Home = () => {
           </div>
         </Marquee>
       </div>
+      <h1 className="text-4xl font-bold text-center">
+        <span>
+          <Typewriter
+            words={[
+              "Find Your Furry Friend Today!",
+              "Adopt, Don’t Shop — Give a Pet a Home.",
+              "Because Every Pet Deserves Love and Care.",
+            ]}
+            loop={0}
+            cursor
+            cursorStyle="|"
+            typeSpeed={100}
+            deleteSpeed={50}
+            delaySpeed={2000}
+          />
+        </span>
+      </h1>
 
       {/* Catagories */}
       <section>
@@ -90,7 +107,10 @@ const Home = () => {
             Shop by Category
           </h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <Link to={"/category-filtered-product/Pets"} className="rounded-2xl bg-[#E9F8E0] p-4">
+            <Link
+              to={"/category-filtered-product/Pets"}
+              className="rounded-2xl bg-[#E9F8E0] p-4"
+            >
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat1}
@@ -107,7 +127,10 @@ const Home = () => {
                 </p>
               </div>
             </Link>
-            <Link to={"/category-filtered-product/Food"} className="rounded-2xl bg-[#E9F8E0] p-4">
+            <Link
+              to={"/category-filtered-product/Food"}
+              className="rounded-2xl bg-[#E9F8E0] p-4"
+            >
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat2}
@@ -124,7 +147,10 @@ const Home = () => {
                 </p>
               </div>
             </Link>
-            <Link to={"/category-filtered-product/Accessories"} className="rounded-2xl bg-[#E9F8E0] p-4">
+            <Link
+              to={"/category-filtered-product/Accessories"}
+              className="rounded-2xl bg-[#E9F8E0] p-4"
+            >
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat3}
@@ -141,7 +167,10 @@ const Home = () => {
                 </p>
               </div>
             </Link>
-            <Link to={"/category-filtered-product/Care Products"} className="rounded-2xl bg-[#E9F8E0] p-4">
+            <Link
+              to={"/category-filtered-product/Care Products"}
+              className="rounded-2xl bg-[#E9F8E0] p-4"
+            >
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat4}
@@ -163,57 +192,58 @@ const Home = () => {
       </section>
 
       {/* Recent Item */}
-       <div className="ml-[20px] md:w-6xl md:mx-auto py-16">
+      <div className="ml-[20px] md:w-6xl md:mx-auto py-16">
         <h2 className="text-3xl  font-bold pb-8">Newest Arrivals</h2>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {datas?.slice(-6).reverse().map((item) => (
-            <div
-              key={item._id}
-              className="w-full rounded-3xl border border-green-200/70 bg-white"
-            >
-              <div className="p-5">
-                <div className="overflow-hidden rounded-2xl">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-72 w-full object-cover"
-                  />
-                </div>
-
-                <div className="mt-5">
-                  <h3 className="text-xl font-extrabold text-slate-900">
-                    {item.name}
-                  </h3>
-
-                  <div className="mt-2 flex items-center justify-between text-sm font-medium text-green-700/80">
-                    <span >{item.category}</span>
-                    <span className=" pl-3 text-right">
-                      {item.location}
-                    </span>
+          {datas
+            ?.slice(-6)
+            .reverse()
+            .map((item) => (
+              <div
+                key={item._id}
+                className="w-full rounded-3xl border border-green-200/70 bg-white"
+              >
+                <div className="p-5">
+                  <div className="overflow-hidden rounded-2xl">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-72 w-full object-cover"
+                    />
                   </div>
 
-                  <div className="mt-3 text-2xl font-extrabold text-slate-900">
-                    ${Number(item.price)}
-                  </div>
+                  <div className="mt-5">
+                    <h3 className="text-xl font-extrabold text-slate-900">
+                      {item.name}
+                    </h3>
 
-                  <Link to={`/all/${item?._id}`}>
-                  <button
-                    type="button"
-                    className="mt-5 h-12 w-full rounded-2xl bg-lime-400 font-semibold text-slate-900 hover:bg-lime-300"
-                  >
-                    See Details
-                  </button>
-                  </Link>
+                    <div className="mt-2 flex items-center justify-between text-sm font-medium text-green-700/80">
+                      <span>{item.category}</span>
+                      <span className=" pl-3 text-right">{item.location}</span>
+                    </div>
 
-                  <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-                    <span className="font-medium">{item.email}</span>
-                    <span>{item.date}</span>
+                    <div className="mt-3 text-2xl font-extrabold text-slate-900">
+                      ${Number(item.price)}
+                    </div>
+
+                    <Link to={`/all/${item?._id}`}>
+                      <button
+                        type="button"
+                        className="mt-5 h-12 w-full rounded-2xl bg-lime-400 font-semibold text-slate-900 hover:bg-lime-300"
+                      >
+                        See Details
+                      </button>
+                    </Link>
+
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+                      <span className="font-medium">{item.email}</span>
+                      <span>{item.date}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 

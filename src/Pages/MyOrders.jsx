@@ -3,34 +3,33 @@ import { Link } from "react-router";
 import axios from "axios";
 
 const MyOrders = () => {
-
   const [myorders, setMyorders] = useState([]);
 
   useEffect(() => {
+    axios
+      .get("https://ph-mil10-mod59-backend.vercel.app/orders")
+      .then((res) => {
+        setMyorders(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-    axios.get('http://localhost:3000/orders')
-    .then(res =>{
-    setMyorders(res.data);
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-  },[]);
+  console.log(myorders);
 
-  console.log(myorders)
-
-    return (
+  return (
     <div className="min-h-screen bg-[#f7fbf3] px-4 py-10 text-slate-900">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-5xl font-extrabold">My Listings</h1>
+          <h1 className="text-5xl font-extrabold">My Orders</h1>
 
           <Link
             to="/addlisting"
             className="inline-flex h-12 items-center justify-center rounded-2xl bg-lime-400 px-6 font-semibold hover:bg-lime-300"
           >
-            Create New Listing
+            Download Report
           </Link>
         </div>
 
@@ -68,7 +67,7 @@ const MyOrders = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default MyOrders;

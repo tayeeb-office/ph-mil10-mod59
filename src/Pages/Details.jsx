@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../Provider/Provider";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Details = () => {
   const [service, setService] = useState([]);
@@ -9,7 +10,7 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
 
   const [quantity, setQuantity] = useState(1);
-  
+
   const [selectedItem, setSelectedItem] = useState(null);
   const { user } = useContext(AuthContext);
 
@@ -31,18 +32,34 @@ const Details = () => {
     };
 
     axios
-      .post("http://localhost:3000/orders", formData)
+      .post("https://ph-mil10-mod59-backend.vercel.app/orders", formData)
       .then((res) => {
         console.log(res);
+
+        if (res.data.acknowledged) {
+          Swal.fire({
+            title: "Item Purchased / Adopted",
+            icon: "success",
+            draggable: true,
+          });
+        }
         document.getElementById("update_modal").close();
         form.reset();
         setQuantity(1);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+        console.error(err);
+      });
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services/${myId}`)
+    fetch(`https://ph-mil10-mod59-backend.vercel.app/services/${myId}`)
       .then((res) => res.json())
       .then((data) => {
         setService(data);

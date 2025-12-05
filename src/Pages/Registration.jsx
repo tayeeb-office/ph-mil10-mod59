@@ -7,6 +7,7 @@ import { AuthContext } from "../Provider/Provider";
 import { updateProfile } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
 import { ImCross } from "react-icons/im";
+import Swal from "sweetalert2";
 
 const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,9 +51,20 @@ const Registration = () => {
           .then(() => {
             setUser({ ...auth.currentUser });
             navigate("/");
+            Swal.fire({
+              title: "Registration Completed",
+              icon: "success",
+              draggable: true,
+            });
           })
           .catch((error) => {
             console.log(error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer: '<a href="#">Why do I have this issue?</a>',
+            });
           });
       })
       .catch((error) => {

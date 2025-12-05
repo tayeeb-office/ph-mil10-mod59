@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/Provider";
 import { Link } from "react-router";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyListings = () => {
   const [myservice, setMyService] = useState([]);
@@ -11,7 +12,9 @@ const MyListings = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/my-services?email=${user.email}`)
+    fetch(
+      `https://ph-mil10-mod59-backend.vercel.app/my-services?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setMyService(data))
       .catch((err) => console.log(err));
@@ -19,11 +22,18 @@ const MyListings = () => {
 
   const handelDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/delete/${id}`)
+      .delete(`https://ph-mil10-mod59-backend.vercel.app/delete/${id}`)
       .then((res) => {
         console.log(res);
-        const filterData = myservice.filter((service) => service._id != id);
-        setMyService(filterData);
+        if (res.data.deletedCount == 1) {
+          const filterData = myservice.filter((service) => service._id != id);
+          setMyService(filterData);
+          Swal.fire({
+            title: "Item Deleted",
+            icon: "success",
+            draggable: true,
+          });
+        }
       })
       .catch((err) => console.error(err));
   };
@@ -44,7 +54,10 @@ const MyListings = () => {
     };
 
     axios
-      .put(`http://localhost:3000/update/${selectedItem._id}`, formData)
+      .put(
+        `https://ph-mil10-mod59-backend.vercel.app/update/${selectedItem._id}`,
+        formData
+      )
       .then((res) => {
         console.log(res);
         // Update local state to reflect changes immediately

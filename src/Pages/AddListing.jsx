@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Provider/Provider";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddListing = () => {
   const { user } = useContext(AuthContext);
@@ -15,7 +16,8 @@ const AddListing = () => {
 
     const name = form.title.value;
     const category = form.category.value;
-    const price = selectedCategory === "Pets" ? 0 : parseFloat(form.price.value);
+    const price =
+      selectedCategory === "Pets" ? 0 : parseFloat(form.price.value);
     const location = form.location.value;
     const description = form.description.value;
     const image = form.imageUrl.value;
@@ -34,9 +36,30 @@ const AddListing = () => {
       email,
     };
 
-    axios.post("http://localhost:3000/services", formData).then((res) => {
-      console.log(res);
-    });
+    axios
+      .post("https://ph-mil10-mod59-backend.vercel.app/services", formData)
+      .then((res) => {
+        console.log(res);
+        if (res.data.acknowledged) {
+          Swal.fire({
+            title: "Item Added",
+            icon: "success",
+            draggable: true,
+          });
+        }
+
+        form.reset();
+        setPrice(0);
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+        console.error(err);
+      });
   };
 
   return (
@@ -145,6 +168,7 @@ const AddListing = () => {
                 <input
                   id="location"
                   name="location"
+                  required
                   type="text"
                   placeholder="Enter city or address"
                   className="h-12 w-full rounded-2xl border border-green-200 bg-green-50/40 px-4 text-slate-800 placeholder:text-green-700/70 focus:border-green-300"

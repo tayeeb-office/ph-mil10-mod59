@@ -6,7 +6,9 @@ const PetsAndSupplies = () => {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services?category=${category}`)
+    fetch(
+      `https://ph-mil10-mod59-backend.vercel.app/services?category=${category}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setService(data);
