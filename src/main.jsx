@@ -17,6 +17,7 @@ import Provider from "./Provider/Provider.jsx";
 import Loading from "./Pages/Loading.jsx";
 import Details from "./Pages/Details.jsx";
 import PrivateRoute from "../src/Provider/PrivateRoute.jsx";
+import Pet from "./Pages/Pet.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,11 +30,14 @@ const router = createBrowserRouter([
         Component: PetsAndSupplies,
       },
       {
+        path: "/category-filtered-product/:category",
+        Component: Pet,
+      },
+      {
         path: "/all/:myId",
         element: (
           <PrivateRoute>
-            {" "}
-            <Details></Details>{" "}
+            <Details></Details>
           </PrivateRoute>
         ),
       },

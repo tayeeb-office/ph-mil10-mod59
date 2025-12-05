@@ -32,8 +32,6 @@ const Home = () => {
 
     const datas = use(dataPromise);
 
-    
-
   return (
     <div>
       <title>Home</title>
@@ -92,7 +90,7 @@ const Home = () => {
             Shop by Category
           </h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+            <Link to={"/category-filtered-product/Pets"} className="rounded-2xl bg-[#E9F8E0] p-4">
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat1}
@@ -108,8 +106,8 @@ const Home = () => {
                   Find your perfect companion
                 </p>
               </div>
-            </a>
-            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+            </Link>
+            <Link to={"/category-filtered-product/Food"} className="rounded-2xl bg-[#E9F8E0] p-4">
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat2}
@@ -125,8 +123,8 @@ const Home = () => {
                   Nutritious meals for every diet
                 </p>
               </div>
-            </a>
-            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+            </Link>
+            <Link to={"/category-filtered-product/Accessories"} className="rounded-2xl bg-[#E9F8E0] p-4">
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat3}
@@ -142,8 +140,8 @@ const Home = () => {
                   Toys, collars, beds, and more
                 </p>
               </div>
-            </a>
-            <a className="rounded-2xl bg-[#E9F8E0] p-4">
+            </Link>
+            <Link to={"/category-filtered-product/Care Products"} className="rounded-2xl bg-[#E9F8E0] p-4">
               <div className="overflow-hidden rounded-xl bg-white/30">
                 <img
                   src={cat4}
@@ -159,7 +157,7 @@ const Home = () => {
                   Health and wellness products
                 </p>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
