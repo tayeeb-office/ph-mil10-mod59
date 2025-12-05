@@ -72,7 +72,7 @@ const MyListings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7fbf3] px-4 py-10 text-slate-900">
+    <div className="min-h-screen  px-4 py-10">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -80,14 +80,14 @@ const MyListings = () => {
 
           <Link
             to="/addlisting"
-            className="inline-flex h-12 items-center justify-center rounded-2xl bg-lime-400 px-6 font-semibold hover:bg-lime-300"
+            className="inline-flex h-12 items-center justify-center rounded-2xl text-black bg-lime-400 px-6 font-semibold hover:bg-lime-300"
           >
             Create New Listing
           </Link>
         </div>
 
         {/* Table */}
-        <div className="mt-10 rounded-3xl bg-white">
+        <div className="mt-10 rounded-3xl bg-white text-black">
           <div className="hidden md:grid grid-cols-5 text-center px-8 py-5 font-extrabold bg-white border-t">
             <div>Image</div>
             <div>Title</div>

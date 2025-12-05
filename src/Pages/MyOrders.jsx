@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import axios from "axios";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { AuthContext } from "../Provider/Provider";
 
 const MyOrders = () => {
   const [myorders, setMyorders] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    if (!user?.email) return;
+
     axios
-      .get("https://ph-mil10-mod59-backend.vercel.app/orders")
+      .get(
+        `https://ph-mil10-mod59-backend.vercel.app/orders?email=${user.email}`
+      )
       .then((res) => {
         setMyorders(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [user]);
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
@@ -54,7 +60,7 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7fbf3] px-4 py-10 text-slate-900">
+    <div className="min-h-screen  px-4 py-10 ">
       <div className="mx-auto max-w-6xl">
     
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -62,7 +68,7 @@ const MyOrders = () => {
 
           <button
             onClick={handleDownloadPDF}
-            className="inline-flex h-12 items-center justify-center rounded-2xl bg-lime-400 px-6 font-semibold hover:bg-lime-300"
+            className="inline-flex h-12 items-center text-black justify-center rounded-2xl bg-lime-400 px-6 font-semibold hover:bg-lime-300"
           >
             Download Report
           </button>
@@ -70,7 +76,7 @@ const MyOrders = () => {
 
  
         <div className="mt-10 rounded-3xl bg-white">
-          <div className="hidden md:grid grid-cols-7 text-center px-8 py-5 font-extrabold bg-white border-t">
+          <div className="hidden md:grid grid-cols-7 text-center px-8 py-5 font-extrabold text-black bg-white border-t">
             <div>Product/Listing Name</div>
             <div>Buyer Name</div>
             <div>Price</div>
@@ -83,7 +89,7 @@ const MyOrders = () => {
           {myorders.map((item) => (
             <div
               key={item._id}
-              className="grid md:grid-cols-7 text-center gap-4 px-8 py-6 border-t"
+              className="grid md:grid-cols-7 text-black text-center gap-4 px-8 py-6 border-t"
             >
               <div className="font-semibold">{item.name}</div>
               <div>{item.buyerName}</div>

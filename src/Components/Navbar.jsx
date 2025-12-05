@@ -13,7 +13,7 @@ const Navbar = () => {
    const handel = () =>{
     setIsChecked(!ischecked);
    }
-   
+
    useEffect ( ()=>{
     const theme = ischecked? "dark" : "light";
     document.documentElement.setAttribute("data-theme", theme);
@@ -25,32 +25,32 @@ const Navbar = () => {
   const Links = (
     <>
       <li>
-        <NavLink to="/" className="text-black font-bold text-l">
+        <NavLink to="/" className="text-base-content font-bold text-l">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/pets&supplies" className="text-black font-bold text-l">
+        <NavLink to="/pets&supplies" className="text-base-content font-bold text-l">
           Pets & Supplies
         </NavLink>
       </li>
       {user && (
         <li>
-          <NavLink to="/addlisting" className="text-black font-bold text-l">
+          <NavLink to="/addlisting" className="text-base-content font-bold text-l">
             Add Listing
           </NavLink>
         </li>
       )}
       {user && (
         <li>
-          <NavLink to="/mylistings" className="text-black font-bold text-l">
+          <NavLink to="/mylistings" className="text-base-content font-bold text-l">
             My Listings
           </NavLink>
         </li>
       )}
       {user && (
         <li>
-          <NavLink to="/myorders" className="text-black font-bold text-l">
+          <NavLink to="/myorders" className="text-base-content font-bold text-l">
             My Orders
           </NavLink>
         </li>
@@ -131,13 +131,13 @@ const Navbar = () => {
           </div>
 
           {!user && (
-            <NavLink to="/registration" className="btn bg-[#37EC13]">
+            <NavLink to="/registration" className="btn bg-lime-400 text-black">
               Sign Up
             </NavLink>
           )}
 
           {!user && (
-            <NavLink to="/login" className="btn bg-[#BFF8B3]">
+            <NavLink to="/login" className="btn bg-lime-400 text-black">
               Log In
             </NavLink>
           )}
@@ -163,7 +163,7 @@ const Navbar = () => {
           )}
 
           {user && (
-            <NavLink onClick={handelSignOut} className="btn bg-[#BFF8B3]">
+            <NavLink onClick={handelSignOut} className="btn bg-lime-400 text-black">
               Log out
             </NavLink>
           )}

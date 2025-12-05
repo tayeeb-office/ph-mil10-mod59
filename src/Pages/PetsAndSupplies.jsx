@@ -30,7 +30,7 @@ const PetsAndSupplies = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 id="category"
                 name="category"
-                className="h-12 w-full rounded-2xl border border-green-200 bg-green-50/40 px-4 pr-10 text-slate-800 focus:border-green-300 "
+                className="h-12 w-full rounded-2xl border border-green-200 bg-lime-400 px-4 pr-10 text-slate-800 focus:border-green-300 "
                 defaultValue=""
               >
                 <option value="" disabled>

@@ -71,7 +71,7 @@ const Details = () => {
   return (
     <div>
       <title>Details</title>
-      <div className="min-h-screen bg-white px-4 py-8">
+      <div className="min-h-screen px-4 py-8">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Image */}
@@ -92,29 +92,29 @@ const Details = () => {
                 </span>
               </div>
 
-              <h1 className="mt-4 text-4xl font-extrabold text-slate-900">
+              <h1 className="mt-4 text-4xl font-extrabold ">
                 {service?.name}
               </h1>
 
               {/* Meta */}
               <div className="mt-8 space-y-5">
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-600">Price</span>
-                  <span className="text-3xl font-extrabold text-slate-900">
+                  <span className="">Price</span>
+                  <span className="text-3xl font-extrabold ">
                     ${Number(service?.price)}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-600">Owner</span>
-                  <span className="font-semibold text-slate-900">
+                  <span className="">Owner</span>
+                  <span className="font-semibold ">
                     {service?.email}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-600">Location</span>
-                  <span className="font-semibold text-slate-900">
+                  <span className="">Location</span>
+                  <span className="font-semibold ">
                     {service?.location}
                   </span>
                 </div>
@@ -126,10 +126,10 @@ const Details = () => {
 
               {/* About */}
               <div className="mt-6">
-                <h2 className="text-lg font-extrabold text-slate-900">
+                <h2 className="text-lg font-extrabold ">
                   About {service?.name}
                 </h2>
-                <p className="mt-3 max-w-xl text-slate-600">
+                <p className="mt-3 max-w-xl ">
                   {service?.description}
                 </p>
               </div>

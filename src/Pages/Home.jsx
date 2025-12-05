@@ -103,7 +103,7 @@ const Home = () => {
       {/* Catagories */}
       <section>
         <div className="mx-auto max-w-6xl px-6 py-14">
-          <h2 className="text-3xl font-extrabold text-slate-900">
+          <h2 className="text-3xl font-extrabold">
             Shop by Category
           </h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -253,10 +253,10 @@ const Home = () => {
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
             <div>
-              <h2 className="text-3xl text-slate-900 sm:text-4xl">
+              <h2 className="text-3xl  sm:text-4xl">
                 <span className="font-extrabold">Why Adopt from PawMart?</span>
               </h2>
-              <p className="mt-5 max-w-xl text-[15px] text-emerald-700/80">
+              <p className="mt-5 max-w-xl text-[15px] ">
                 We are more than just a platform; we are a community dedicated
                 to finding loving homes for every pet. When you adopt through
                 PawMart, you're not just getting a pet; you're saving a life and
@@ -265,13 +265,13 @@ const Home = () => {
               <div className="mt-10 space-y-7">
                 <div className="flex gap-4">
                   <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
-                    <FaShieldAlt />
+                    <FaShieldAlt className="text-black" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-slate-900">
+                    <h3 className="text-base font-semibold ">
                       Verified Shelters
                     </h3>
-                    <p className="mt-1 text-sm text-emerald-700/75">
+                    <p className="mt-1 text-sm">
                       We partner with trusted, reputable shelters and rescue
                       organizations.
                     </p>
@@ -279,13 +279,13 @@ const Home = () => {
                 </div>
                 <div className="flex gap-4">
                   <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
-                    <FaPeopleGroup />
+                    <FaPeopleGroup className="text-black" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-slate-900">
+                    <h3 className="text-base font-semibold ">
                       Community Support
                     </h3>
-                    <p className="mt-1 text-sm text-emerald-700/75">
+                    <p className="mt-1 text-sm ">
                       Join a network of passionate pet lovers for advice and
                       friendship.
                     </p>
@@ -293,13 +293,13 @@ const Home = () => {
                 </div>
                 <div className="flex gap-4">
                   <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
-                    <PiHandHeartDuotone />
+                    <PiHandHeartDuotone className="text-black" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-slate-900">
+                    <h3 className="text-base font-semibold ">
                       Seamless Process
                     </h3>
-                    <p className="mt-1 text-sm text-emerald-700/75">
+                    <p className="mt-1 text-sm">
                       Our streamlined process makes adoption simple and
                       stress-free.
                     </p>
@@ -324,7 +324,7 @@ const Home = () => {
 
       <section className="px-4 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center text-3xl font-extrabold text-slate-900 sm:text-4xl">
+          <h2 className="text-center text-3xl font-extrabold sm:text-4xl">
             Meet Our Pet Heroes
           </h2>
           <div className="mt-10 grid gap-7 md:grid-cols-3">

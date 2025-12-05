@@ -63,13 +63,13 @@ const AddListing = () => {
   };
 
   return (
-    <div className=" bg-[#f7fbf3] px-4 py-10 text-slate-900">
+    <div className=" px-4 py-10 ">
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold md:text-5xl">
             Add New Listing
           </h1>
-          <p className="mt-3 text-[15px] font-medium text-green-700/80">
+          <p className="mt-3 text-[15px] font-medium ">
             Fill out the details below to add a pet for adoption or a product
             for sale.
           </p>
