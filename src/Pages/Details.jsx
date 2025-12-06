@@ -28,7 +28,7 @@ const Details = () => {
       location: form.location.value,
       note: form.description.value,
       buyerName: user.displayName,
-      buyerEmail: user.email,
+      email: user.email,
     };
 
     axios
@@ -70,7 +70,7 @@ const Details = () => {
 
   return (
     <div>
-      <title>Details</title>
+      <title>Details Page</title>
       <div className="min-h-screen px-4 py-8">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-2">

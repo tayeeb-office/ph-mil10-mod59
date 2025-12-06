@@ -98,6 +98,7 @@ const MyListings = () => {
 
   return (
     <div className="min-h-screen  px-4 py-10">
+      <title>My Listings</title>
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

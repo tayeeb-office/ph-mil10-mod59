@@ -19,7 +19,7 @@ const CategoryPage = () => {
 
   return (
     <div className="ml-[20px] md:w-6xl md:mx-auto py-16">
-      <title>Pets & Supplies</title>
+      <title>Category Page</title>
       <div>
         <div className="flex flex-col md:flex-row justify-between items-center py-8">
           <h2 className="text-3xl  font-bold pb-8">

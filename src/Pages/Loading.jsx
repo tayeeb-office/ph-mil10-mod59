@@ -5,6 +5,7 @@ import logo from "../assets/Logo.png";
 const Loading = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
+      <title>Loading..</title>
       <motion.img
         src={logo}
         alt="loading"
